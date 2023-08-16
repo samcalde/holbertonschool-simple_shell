@@ -10,12 +10,12 @@ int main()
     pid_t pid;
     char *str[5];
     int i = 0;
-	int status; //variable para wait
+	int status; 
 
     while(1)
     {
         write(1, "($)", 4);
-        line = malloc(1024 * sizeof(char)); //memoria para la línea de input
+        line = malloc(1024 * sizeof(char)); 
         if (line == NULL)
             exit(1);
         line_len = getline(&line, &arg_line_len, stdin);
@@ -24,7 +24,7 @@ int main()
             free(line);
             exit(0);
         }
-        token = strtok(line, delimiter); //corregido, faltaba ejecutar strtok
+        token = strtok(line, delimiter); 
         while (token != NULL)
         {
             str[i] = token;
@@ -37,10 +37,10 @@ int main()
             exit (1);
         else if (pid == 0)
         {
-            execve(str[0], str, NULL); //cuando leamos lo del pa
+            execve(str[0], str, NULL); 
 			perror("execve");
 			exit(1);
-        } // falta correr el wait, hacer ejercicios del concept page para entender
+        } 
 		else
 			wait(&status);
     }
