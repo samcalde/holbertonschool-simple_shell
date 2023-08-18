@@ -11,12 +11,13 @@ int main()
     char *str[5];
     int i = 1;
     int status;
-	
+
     while(1)
     {
 		line = NULL;
         i = 1;
-        write(1, "($) ", 5);
+		if (isatty(STDIN_FILENO))
+        	write(1, "($) ", 5);
         line_len = getline(&line, &arg_line_len, stdin);
         if (line_len == EOF)
         {
@@ -36,7 +37,7 @@ int main()
         if (pid == -1)
 		{
 			free(line);
-			exit (0);
+			exit(0);
 		}
         else if (pid == 0)
         {
