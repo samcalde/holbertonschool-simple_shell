@@ -26,30 +26,33 @@ int main()
         }
         token = strtok(line, delimiter);
         str[0] = token;
-        while (token != NULL)
-        {
-            token = strtok(NULL, delimiter);
-            str[i] = token;
-            i++;
-        }
-        str[i] = NULL;
-        pid = fork();
-        if (pid == -1)
+		if (token != NULL)
 		{
-			free(line);
-			exit(0);
+			while (token != NULL)
+			{
+				token = strtok(NULL, delimiter);
+				str[i] = token;
+				i++;
+			}
+			str[i] = NULL;
+			pid = fork();
+			if (pid == -1)
+			{
+				free(line);
+				exit(0);
+			}
+			else if (pid == 0)
+			{
+				free(line);
+				if(execve(str[0], str, NULL) == -1)
+				{
+					perror("execve");
+					exit(0);
+				}
+			}
+			else
+				wait(&status);
 		}
-        else if (pid == 0)
-        {
-            free(line);
-            if(execve(str[0], str, NULL) == -1)
-            {
-                perror("execve");
-                exit(0);
-            }
-        }
-        else
-            wait(&status);
         free(line);
     }
     return (0);
