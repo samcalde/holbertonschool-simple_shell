@@ -1,44 +1,33 @@
 #include "main.h"
 
-extern char **environ;
-
 int checkdir(char **str, char *line) 
 {
 	char *var[128], *command, *temp;
 	int i = 1;
 	const char delimiter[] = ":\n";
 	struct stat file_stat;
-
 	char *env = malloc(1024);
+
 	if (env == NULL)
 		return (0);
-	
 	strcpy(env, getenv("PATH"));
-
 	var[0] = strtok(env, delimiter);
     for (i = 1; i < 15; i++)
 	{
 		var[i] = strtok(NULL, delimiter);
 		if (var[i] == NULL)
-			break;
+		break;
 	}
-
-	command = malloc(128);
+	command = malloc(32);
 	if (command == NULL)
 	{
 		free(env);
 		return (0);
 	}
-
 	if (stat(str[0], &file_stat) == 0)
-	{
 		forkshell(str[0], str, line, command, env);
-	}
-		
-
 	strcpy(command, "/");
 	strcat(command, str[0]);
-
 	for (i = 0; var[i] != NULL; i++)
 	{
 		temp = var[i];
