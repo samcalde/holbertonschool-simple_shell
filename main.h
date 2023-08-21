@@ -9,6 +9,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 int checkdir(char **str, char *line);
-int forkshell(char *file, char **str, char *line, char *command);
+int forkshell(char *file, char **str, char *line, char *command, char *env);
+int freemem(char *line, char *command, char *env);
 
 #endif

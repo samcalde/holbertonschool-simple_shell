@@ -25,10 +25,16 @@ int checkdir(char **str, char *line)
 
 	command = malloc(128);
 	if (command == NULL)
+	{
+		free(env);
 		return (0);
+	}
 
 	if (stat(str[0], &file_stat) == 0)
-		forkshell(str[0], str, line, command);
+	{
+		forkshell(str[0], str, line, command, env);
+	}
+		
 
 	strcpy(command, "/");
 	strcat(command, str[0]);
@@ -39,14 +45,14 @@ int checkdir(char **str, char *line)
 		strcat(temp, command);
 		if (stat(temp, &file_stat) == 0)
 		{
-			forkshell(temp, str, line, command);
+			forkshell(temp, str, line, command, env);
 			break;
 		}
     }
 	return (0);
 }
 
-int forkshell(char *file, char **str, char *line, char *command)
+int forkshell(char *file, char **str, char *line, char *command, char *env)
 {
 	pid_t pid;
 	int status;
@@ -54,14 +60,12 @@ int forkshell(char *file, char **str, char *line, char *command)
 	pid = fork();
 	if (pid == -1)
 	{
-		free(command);
-		free(line);
+		freemem(line, command, env);
 		exit(0);
 	}
 	else if (pid == 0)
 	{
-		free(command);
-		free(line);
+		freemem(line, command, env);
 		if(execve(file, str, NULL) == -1)
 		{
 			perror("execve");
@@ -71,7 +75,15 @@ int forkshell(char *file, char **str, char *line, char *command)
 	else
 	{
 		wait(&status);
-		free(command);
+		freemem(line, command, env);
 	}
+	return (0);
+}
+
+int freemem(char *line, char *command, char *env)
+{
+	free(command);
+	free(env);
+	free(line);
 	return (0);
 }

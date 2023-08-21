@@ -35,7 +35,6 @@ int main()
 			str[i] = NULL;
 			checkdir(str, line);
 		}
-        free(line);
     }
     return (0);
 }
