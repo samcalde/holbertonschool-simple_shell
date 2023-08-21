@@ -7,10 +7,8 @@ int main()
     char *line = NULL;
     char *token;
     const char delimiter[] = " \n\t";
-    pid_t pid;
     char *str[5];
     int i = 1;
-    int status;
 
     while(1)
     {
@@ -35,23 +33,7 @@ int main()
 				i++;
 			}
 			str[i] = NULL;
-			pid = fork();
-			if (pid == -1)
-			{
-				free(line);
-				exit(0);
-			}
-			else if (pid == 0)
-			{
-				free(line);
-				if(execve(str[0], str, NULL) == -1)
-				{
-					perror("execve");
-					exit(0);
-				}
-			}
-			else
-				wait(&status);
+			checkdir(str, line);
 		}
         free(line);
     }
