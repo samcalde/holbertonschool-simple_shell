@@ -29,6 +29,7 @@ int checkdir(char **str, char *line)
 	if (command == NULL)
 	{
 		free(env);
+		free(line);
 		return (0);
 	}
 	if (stat(str[0], &file_stat) == 0)
@@ -86,6 +87,14 @@ int forkshell(char *file, char **str, char *line, char *command, char *env)
 	return (0);
 }
 
+/**
+ * freemem - free allocated memory
+ * @line: memory space to be freed
+ * @command: memory space to be freed
+ * @env: memory space to be freed
+ *
+ * Return: 0
+ */
 int freemem(char *line, char *command, char *env)
 {
 	free(command);
