@@ -14,10 +14,8 @@ int main(void)
 {
 	ssize_t line_len = 0;
 	size_t arg_line_len = 0;
-	char *line = NULL;
-	char *token;
+	char *line = NULL, *token, *str[5];
 	const char delimiter[] = " \n\t";
-	char *str[5];
 	int i = 1;
 
 	while (1)
@@ -34,7 +32,9 @@ int main(void)
 		}
 		token = strtok(line, delimiter);
 		str[0] = token;
-		if (token != NULL)
+		if (strcmp(str[0], "env") == 0)
+			printenv();
+		else if (token != NULL)
 		{
 			while (token != NULL)
 			{
@@ -45,9 +45,9 @@ int main(void)
 			str[i] = NULL;
 			checkdir(str);
 			free(line); 
-		}
+		}		
 		else
-		free(line); /*en caso de input solo con espacios, no estabamos liberando line*/
+			free(line);
 	}
 	return (0);
 }

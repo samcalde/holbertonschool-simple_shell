@@ -10,5 +10,6 @@
 #include <sys/stat.h>
 int checkdir(char **str);
 int forkshell(char *file, char **str, char *env);
+int printenv();
 
 #endif

@@ -25,13 +25,11 @@ int checkdir(char **str)
 			break;
 		i++;
 	}
-
 	if (stat(str[0], &file_stat) == 0)
 	{
 		forkshell(str[0], str, env);
 		return (0);
 	}
-
 	command = malloc(32); 
 	if (command == NULL)
 		return (0);
@@ -70,14 +68,14 @@ int forkshell(char *file, char **str, char *env)
 	pid = fork();
 	if (pid == -1)
 	{
-		exit(0);
+		exit(1);
 	}
 	else if (pid == 0)
 	{
 		if (execve(file, str, NULL) == -1)
 		{
 			perror("execve");
-			exit(0);
+			exit(2);
 		}
 	}
 	else
