@@ -24,7 +24,10 @@ int main(void)
 			write(1, "($) ", 5);
 		line_len = getline(&line, &arg_line_len, stdin);
 		if (line_len == EOF || (strcmp(line, "exit\n") == 0))
+		{
+			free(line);
 			exit(0);
+		}
 		token = strtok(line, delimiter);
 		str[0] = token;
 		if (token != NULL)
@@ -39,6 +42,8 @@ int main(void)
 			free(line);
 			checkdir(str);
 		}
+		else
+			free(line);
 	}
 	return (0);
 }
