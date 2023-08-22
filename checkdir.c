@@ -49,6 +49,8 @@ int checkdir(char **str)
 			return (0);
 		}
 	}
+	free(env);
+	free(command);
 	return (0);
 }
 
