@@ -41,6 +41,8 @@ int main(void)
 			str[i] = NULL;
 			checkdir(str);
 		}
+		else
+			free(line);
 	}
 	return (0);
 }
