@@ -39,10 +39,9 @@ int main(void)
 				i++;
 			}
 			str[i] = NULL;
+			free(line);
 			checkdir(str);
 		}
-		else
-			free(line);
 	}
 	return (0);
 }
