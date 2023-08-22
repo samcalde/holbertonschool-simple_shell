@@ -30,12 +30,11 @@ int checkdir(char **str, char *line)
 	if (command == NULL)
 	{
 		free(env);
-		free(line);
 		return (0);
 	}
 	if (stat(str[0], &file_stat) == 0)
 	{
-		forkshell(str[0], str, line, command, env);
+		forkshell(str[0], str, command, env);
 		return (0);
 	}
 	strcpy(command, "/");
@@ -46,7 +45,7 @@ int checkdir(char **str, char *line)
 		strcat(temp, command);
 		if (stat(temp, &file_stat) == 0)
 		{
-			forkshell(temp, str, line, command, env);
+			forkshell(temp, str, command, env);
 			return (0);
 		}
 	}
@@ -57,13 +56,12 @@ int checkdir(char **str, char *line)
  * forkshell - when command is found, it creates the fork
  * @file: location of the executable file
  * @str: arguments
- * @line: memory space to be freed
  * @command: memory space to be freed
  * @env: memory space to be freed
  *
  * Return: 0
  */
-int forkshell(char *file, char **str, char *line, char *command, char *env)
+int forkshell(char *file, char **str, char *command, char *env)
 {
 	pid_t pid;
 	int status;
@@ -71,12 +69,12 @@ int forkshell(char *file, char **str, char *line, char *command, char *env)
 	pid = fork();
 	if (pid == -1)
 	{
-		freemem(line, command, env);
+		freemem(command, env);
 		exit(0);
 	}
 	else if (pid == 0)
 	{
-		freemem(line, command, env);
+		freemem(command, env);
 		if (execve(file, str, NULL) == -1)
 		{
 			perror("execve");
@@ -86,23 +84,21 @@ int forkshell(char *file, char **str, char *line, char *command, char *env)
 	else
 	{
 		wait(&status);
-		freemem(line, command, env);
+		freemem(command, env);
 	}
 	return (0);
 }
 
 /**
  * freemem - free allocated memory
- * @line: memory space to be freed
  * @command: memory space to be freed
  * @env: memory space to be freed
  *
  * Return: 0
  */
-int freemem(char *line, char *command, char *env)
+int freemem(char *command, char *env)
 {
 	free(command);
 	free(env);
-	free(line);
 	return (0);
 }
