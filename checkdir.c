@@ -17,15 +17,16 @@ int checkdir(char **str, char *line)
 
 	if (env == NULL)
 		return (0);
-	strcpy(env, getenv("PATH"));
+	strcpy(env, getenv("PATH")); 
 	var[0] = strtok(env, delimiter);
-	for (i = 1; i < 15; i++)
+	while (1)
 	{
 		var[i] = strtok(NULL, delimiter);
 		if (var[i] == NULL)
 			break;
+		i++;
 	}
-	command = malloc(32);
+	command = malloc(32); 
 	if (command == NULL)
 	{
 		free(env);
@@ -33,7 +34,10 @@ int checkdir(char **str, char *line)
 		return (0);
 	}
 	if (stat(str[0], &file_stat) == 0)
+	{
 		forkshell(str[0], str, line, command, env);
+		return (0);
+	}
 	strcpy(command, "/");
 	strcat(command, str[0]);
 	for (i = 0; var[i] != NULL; i++)
@@ -43,7 +47,7 @@ int checkdir(char **str, char *line)
 		if (stat(temp, &file_stat) == 0)
 		{
 			forkshell(temp, str, line, command, env);
-			break;
+			return (0);
 		}
 	}
 	return (0);
