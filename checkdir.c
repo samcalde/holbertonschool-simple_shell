@@ -3,11 +3,10 @@
 /**
  * checkdir - check directories to find executable file
  * @str: tokenized input line
- * @line: full line with allocated memory
  *
  * Return: 0
  */
-int checkdir(char **str, char *line)
+int checkdir(char **str)
 {
 	char *var[128], *command, *temp;
 	int i = 1;

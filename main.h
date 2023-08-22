@@ -8,7 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-int checkdir(char **str, char *line);
+int checkdir(char **str);
 int forkshell(char *file, char **str, char *command, char *env);
 int freemem(char *command, char *env);
 
