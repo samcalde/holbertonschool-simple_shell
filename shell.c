@@ -5,7 +5,11 @@
  *
  * Return: 0 when exiting
  */
+/*falta impresion de errores, 
+status de salida : leer WEXITSTATUS
+poner error cuando le pasemos echo en modo no interactivo. si corre echo "ëcho hola" | ./hsh 
 
+*/
 int main(void)
 {
 	ssize_t line_len = 0;
@@ -39,8 +43,8 @@ int main(void)
 				i++;
 			}
 			str[i] = NULL;
-			free(line);
 			checkdir(str);
+			free(line); /*line deberia liberarse despues de ejecutar las funcion*/
 		}
 	}
 	return (0);
