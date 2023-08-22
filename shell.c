@@ -33,7 +33,7 @@ int main(void)
 		token = strtok(line, delimiter);
 		str[0] = token;
 		if (strcmp(str[0], "env") == 0)
-			printenv();
+			printenv(line);
 		else if (token != NULL)
 		{
 			while (token != NULL)
