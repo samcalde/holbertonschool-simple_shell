@@ -44,8 +44,10 @@ int main(void)
 			}
 			str[i] = NULL;
 			checkdir(str);
-			free(line); /*line deberia liberarse despues de ejecutar las funcion*/
+			free(line); 
 		}
+		else
+		free(line); /*en caso de input solo con espacios, no estabamos liberando line*/
 	}
 	return (0);
 }
