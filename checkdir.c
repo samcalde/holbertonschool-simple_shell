@@ -67,7 +67,6 @@ int forkshell(char *file, char **str, char *env)
 	pid_t pid;
 	int status;
 
-	printf("file location before fork: %s\n", file);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -76,7 +75,6 @@ int forkshell(char *file, char **str, char *env)
 	else if (pid == 0)
 	{
 		free(env);
-		printf("file location after fork: %s\n", file);
 		if (execve(file, str, NULL) == -1)
 		{
 			perror("execve");
