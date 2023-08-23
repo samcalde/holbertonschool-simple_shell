@@ -66,7 +66,6 @@ int forkshell(char *file, char **str, char *env)
 {
 	pid_t pid;
 	int status;
-	char **envp = environ;
 
 	pid = fork();
 	if (pid == -1)
@@ -75,7 +74,7 @@ int forkshell(char *file, char **str, char *env)
 	}
 	else if (pid == 0)
 	{
-		if (execve(file, str, envp) == -1)
+		if (execve(file, str, NULL) == -1)
 		{
 			perror("execve");
 			exit(2);
