@@ -15,7 +15,7 @@ int main(void)
 	ssize_t line_len = 0;
 	size_t arg_line_len = 0;
 	char *line = NULL, *token, *str[5];
-	const char delimiter[] = " \n\t";
+	const char delimiter[] = " \n\t\0";
 	int i = 1;
 
 	while (1)

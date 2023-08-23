@@ -2,15 +2,15 @@
 
 extern char **environ;
 
-int printenv(char *line) 
+int printenv(char *line)
 {
     char **env = environ;
 
-	free(line);
     while (*env != NULL) {
         printf("%s\n", *env);
         env++; 
     }
 
+	free(line);
     return (0);
 }
