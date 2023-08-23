@@ -49,6 +49,7 @@ int checkdir(char **str)
 			return (0);
 		}
 	}
+	fprintf(stderr, "./hsh: 1: %s: not found\n", str[0]);
 	free(env);
 	free(command);
 	return (0);
