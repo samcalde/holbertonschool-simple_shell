@@ -1,5 +1,7 @@
 #include "main.h"
 
+extern char **environ;
+
 /**
  * checkdir - check directories to find executable file
  * @str: tokenized input line
@@ -72,7 +74,7 @@ int forkshell(char *file, char **str, char *env)
 	}
 	else if (pid == 0)
 	{
-		if (execve(file, str, NULL) == -1)
+		if (execve(file, str, environ) == -1)
 		{
 			perror("execve");
 			exit(2);
@@ -84,4 +86,17 @@ int forkshell(char *file, char **str, char *env)
 		free(env);
 	}
 	return (0);
+}
+
+int printenv(char *line)
+{
+    char **env = environ;
+
+    while (*env != NULL) {
+        printf("%s\n", *env);
+        env++; 
+    }
+
+	free(line);
+    return (0);
 }
