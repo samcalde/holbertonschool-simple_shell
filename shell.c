@@ -10,7 +10,7 @@ status de salida : leer WEXITSTATUS
 poner error cuando le pasemos echo en modo no interactivo. si corre echo "ëcho hola" | ./hsh 
 
 */
-int main(int argc, char *argv[], char *envp[])
+int main(void)
 {
 	ssize_t line_len = 0;
 	size_t arg_line_len = 0;
