@@ -10,7 +10,7 @@ extern char **environ;
  */
 int checkdir(char **str)
 {
-	char *var[128], *command, *temp;
+	char *var[128], *command, temp[128];
 	int i = 1;
 	const char delimiter[] = ":"; /*salto linea no tenia sentido*/
 	struct stat file_stat;
@@ -40,7 +40,7 @@ int checkdir(char **str)
 	strcat(command, str[0]);
 	for (i = 0; var[i] != NULL; i++)
 	{
-		temp = var[i];
+		strcpy(temp, var[i]);
 		strcat(temp, command);
 		if (stat(temp, &file_stat) == 0) /*tener 2 stats no tiene sentido*/
 		{
