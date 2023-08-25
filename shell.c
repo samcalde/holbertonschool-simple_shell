@@ -12,6 +12,7 @@ int main(void)
 	char *line = NULL, *token, *str[5];
 	const char delimiter[] = " \n\t\0";
 	int i = 1;
+	
 	while (1)
 	{
 		line = NULL;
@@ -27,13 +28,10 @@ int main(void)
 		token = strtok(line, delimiter);
 		str[0] = token;
 		if (str[0] == NULL)
-		{
 			free(line);
-			return (0);
-		}
-		if (strcmp(str[0], "env") == 0)
+		else if (strcmp(str[0], "env") == 0)
 			printenv(line);
-		else if (token != NULL)
+		else
 		{
 			while (token != NULL)
 			{
@@ -48,8 +46,6 @@ int main(void)
 			checkdir(str);
 			free(line);
 		}
-		else
-			free(line);
 	}
 	return (0);
 }
