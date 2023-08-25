@@ -15,10 +15,8 @@ int checkdir(char **str)
 	struct stat file_stat;
 	char *env = malloc(1024);
 
-	if (env == NULL)
-		return (0);
 	strcpy(env, getenv("PATH"));
-	if (getenv("PATH") == NULL)
+	if (env == NULL)
 		return (0);
 	var[0] = strtok(env, delimiter);
 	while (1)
@@ -45,8 +43,7 @@ int checkdir(char **str)
 		if (stat(temp, &file_stat) == 0)
 		{
 			free(command);
-			forkshell(temp, str, env);
-			return (0);
+			return (forkshell(temp, str, env));
 		}
 	}
 	fprintf(stderr, "./hsh: 1: %s: not found\n", str[0]);
@@ -54,6 +51,7 @@ int checkdir(char **str)
 	free(command);
 	return (0);
 }
+
 /**
 * forkshell - when command is found, it creates the fork
 * @file: location of the executable file
@@ -88,6 +86,7 @@ int forkshell(char *file, char **str, char *env)
 	}
 	return (0);
 }
+
 /**
 * printenv - prints environment
 * @line: bring file to free and save space in main
