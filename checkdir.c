@@ -9,11 +9,10 @@
 
 int checkdir(char **str)
 {
-	char *var[128], *command, temp[128];
+	char *var[128], *command, temp[128], *env = malloc(1024);
 	int i = 1;
 	const char delimiter[] = ":";
 	struct stat file_stat;
-	char *env = malloc(1024);
 
 	strcpy(env, getenv("PATH"));
 	if (env == NULL)
