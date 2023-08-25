@@ -12,7 +12,7 @@ int main(void)
 	char *line = NULL, *token, *str[5];
 	const char delimiter[] = " \n\t\0";
 	int i = 1;
-	
+
 	while (1)
 	{
 		line = NULL;
@@ -33,14 +33,10 @@ int main(void)
 			printenv(line);
 		else
 		{
-			while (token != NULL)
+			for (i = 1; token != NULL; i++)
 			{
 				token = strtok(NULL, delimiter);
-				if (token != NULL)
-				{
-					str[i] = token;
-					i++;
-				}
+				str[i] = token;
 			}
 			str[i] = NULL;
 			checkdir(str);
