@@ -26,10 +26,7 @@ int checkdir(char **str)
 		i++;
 	}
 	if (stat(str[0], &file_stat) == 0)
-	{
-		forkshell(str[0], str, env);
-		return (0);
-	}
+		return (forkshell(str[0], str, env));
 	command = malloc(32);
 	if (command == NULL)
 		return (0);
@@ -75,7 +72,7 @@ int forkshell(char *file, char **str, char *env)
 		if (execve(file, str, envp) == -1)
 		{
 			perror("execve");
-			exit(2);
+			return(127);
 		}
 	}
 	else

@@ -11,7 +11,7 @@ int main(void)
 	size_t arg_line_len = 0;
 	char *line = NULL, *token, *str[5];
 	const char delimiter[] = " \n\t\0";
-	int i = 1;
+	int i = 1, exstat;
 
 	while (1)
 	{
@@ -39,9 +39,9 @@ int main(void)
 				str[i] = token;
 			}
 			str[i] = NULL;
-			checkdir(str);
+			exstat = checkdir(str);
 			free(line);
 		}
 	}
-	return (0);
+	return (exstat);
 }
