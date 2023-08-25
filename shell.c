@@ -38,7 +38,6 @@ int main(void)
 				token = strtok(NULL, delimiter);
 				str[i] = token;
 			}
-			str[i] = NULL;
 			exstat = checkdir(str);
 			free(line);
 		}
