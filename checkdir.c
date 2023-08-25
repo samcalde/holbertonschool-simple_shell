@@ -14,9 +14,11 @@ int checkdir(char **str)
 	const char delimiter[] = ":";
 	struct stat file_stat;
 
-	strcpy(env, getenv("PATH"));
-	if (env == NULL)
+	if (stat(str[0], &file_stat) == 0)
+		return (forkshell(str[0], str, env));
+	if (env == NULL || getenv("PATH") == NULL)
 		return (0);
+	strcpy(env, getenv("PATH"));
 	var[0] = strtok(env, delimiter);
 	while (1)
 	{
@@ -25,8 +27,6 @@ int checkdir(char **str)
 			break;
 		i++;
 	}
-	if (stat(str[0], &file_stat) == 0)
-		return (forkshell(str[0], str, env));
 	command = malloc(32);
 	if (command == NULL)
 		return (0);
@@ -80,7 +80,7 @@ int forkshell(char *file, char **str, char *env)
 		wait(&status);
 		free(env);
 	}
-	return (0);
+	return (status);
 }
 
 /**
