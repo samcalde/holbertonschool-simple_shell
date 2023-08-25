@@ -23,7 +23,7 @@ int main(void)
 		if (line_len == EOF || (strcmp(line, "exit\n") == 0))
 		{
 			free(line);
-			exit(0);
+			return (exstat);
 		}
 		token = strtok(line, delimiter);
 		str[0] = token;
