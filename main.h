@@ -8,6 +8,7 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+extern char **environ;
 int checkdir(char **str);
 int forkshell(char *file, char **str, char *env);
 int printenv(char *line);

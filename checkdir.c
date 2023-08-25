@@ -1,7 +1,5 @@
 #include "main.h"
 
-extern char **environ;
-
 /**
 * checkdir - check directories to find executable file
 * @str: tokenized input line
@@ -16,6 +14,7 @@ int checkdir(char **str)
 	const char delimiter[] = ":";
 	struct stat file_stat;
 	char *env = malloc(1024);
+
 	if (env == NULL)
 		return (0);
 	strcpy(env, getenv("PATH"));
@@ -68,6 +67,7 @@ int forkshell(char *file, char **str, char *env)
 	pid_t pid;
 	int status;
 	char **envp = environ;
+
 	pid = fork();
 	if (pid == -1)
 	{
@@ -96,6 +96,7 @@ int forkshell(char *file, char **str, char *env)
 int printenv(char *line)
 {
 	char **env = environ;
+
 	while (*env != NULL)
 	{
 		printf("%s\n", *env);

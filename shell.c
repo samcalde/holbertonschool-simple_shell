@@ -29,7 +29,7 @@ int main(void)
 		if (str[0] == NULL)
 		{
 			free(line);
-			return(0);
+			return (0);
 		}
 		if (strcmp(str[0], "env") == 0)
 			printenv(line);
